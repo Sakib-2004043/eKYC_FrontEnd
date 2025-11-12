@@ -1,0 +1,159 @@
+/* ====== General Layout ====== */
+.admin-container {
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(135deg, #f4f7fb, #e8eef9);
+  font-family: "Inter", sans-serif;
+  color: #2c3e50;
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a2b49;
+  margin-bottom: 30px;
+}
+
+/* ====== Table Section ====== */
+.table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-table th {
+  background-color: #f1f5fb;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.admin-table tr:hover {
+  background-color: #f9fbff;
+  transition: background 0.3s ease;
+}
+
+/* ====== Buttons ====== */
+.view-btn {
+  background-color: #4a90e2;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: #357abd;
+}
+
+.close-btn {
+  background-color: #ff5a5f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #e04848;
+}
+
+/* ====== Error and Empty State ====== */
+.admin-error {
+  text-align: center;
+  color: #d9534f;
+  background: #fdeaea;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.no-data-msg {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1rem;
+  margin-top: 40px;
+}
+
+/* ====== Modal Popup ====== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(28, 41, 61, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 30px;
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  animation: scaleUp 0.3s ease;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1a2b49;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modal-content {
+  color: #333;
+  line-height: 1.5;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 250px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+}
+
+/* ====== Animations ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}

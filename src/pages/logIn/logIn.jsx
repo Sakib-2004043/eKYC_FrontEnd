@@ -14,12 +14,22 @@ export default function Login() {
     setMessage("");
 
     try {
-      const response = await kycService.login(email, password);
-      setMessage(response.message || "Login successful!");
+      // 1️⃣ Login
+      const loginResponse = await kycService.login(email, password);
+      setMessage(loginResponse.message || "Login successful!");
 
-      if (response.success) {
-        // ✅ redirect to /admin
-        navigate("/admin");
+      if (loginResponse.success) {
+        // 2️⃣ Get user type from backend
+        const verifyResponse = await kycService.verifyEmail(email); // send email to get type
+        const userType = verifyResponse.user?.type;
+
+        // 3️⃣ Navigate based on type and pass email
+        if (userType === "admin") {
+          navigate("/admin", { state: { email } });
+        } else {
+          navigate("/user", { state: { email } });
+        }
+
       }
     } catch (error) {
       setMessage(error.message || "Login failed.");

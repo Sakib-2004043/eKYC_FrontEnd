@@ -46,21 +46,22 @@ class KycService {
     }
   }
 
-  // // 🚪 Optional logout function (clear cookie on backend)
-  // async logout() {
-  //   const url = `${baseURL}/api/kyc/logout`;
-  //   const config = {
-  //     withCredentials: true,
-  //   };
+  async verifyEmail(email) {
+    const url = `${baseURL}/api/kyc/verify`;
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
 
-  //   try {
-  //     const response = await axios.post(url, {}, config);
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error("❌ Error in logout:", error);
-  //     throw error.response?.data || error.message;
-  //   }
-  // }
+    try {
+      const response = await axios.post(url, { email }, config);
+      return response.data; // { success, message, user: { email, type } }
+    } catch (error) {
+      console.error("❌ Error in verifying email:", error);
+      throw error.response?.data || error.message;
+    }
+  }
+
 }
 
 const kycService = new KycService();
