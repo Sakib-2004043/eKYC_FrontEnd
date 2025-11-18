@@ -9,7 +9,7 @@ class AdminService {
     const url = `${baseURL}/api/kyc/getAllKyc`;
     const config = {
       headers: { "Content-Type": "application/json" },
-      withCredentials: true, // include cookies
+      withCredentials: true,
     };
 
     try {
@@ -17,6 +17,23 @@ class AdminService {
       return response.data; // { success, message, data: [...] }
     } catch (error) {
       console.error("❌ Error fetching all KYC data:", error);
+      throw error.response?.data || error.message;
+    }
+  }
+
+  // 📝 Generate AI description for a user
+  async generateDescription(userData) {
+    const url = `${baseURL}/api/kyc/generateDescription`;
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+
+    try {
+      const response = await axios.post(url, userData, config);
+      return response.data; // { success, message, description }
+    } catch (error) {
+      console.error("❌ Error generating AI description:", error);
       throw error.response?.data || error.message;
     }
   }

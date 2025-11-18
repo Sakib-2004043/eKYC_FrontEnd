@@ -8,6 +8,7 @@ export default function Admin() {
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email;
+
   const [loading, setLoading] = useState(true);
   const [kycData, setKycData] = useState([]);
   const [error, setError] = useState("");
@@ -15,6 +16,9 @@ export default function Admin() {
   // ✅ Modal states
   const [showModal, setShowModal] = useState(false);
   const [selectedDescription, setSelectedDescription] = useState("");
+
+  // ✅ Row-specific loading state for AI generation
+  const [generatingIds, setGeneratingIds] = useState([]); // array of user._id currently generating
 
   useEffect(() => {
     if (!email) {
@@ -61,6 +65,37 @@ export default function Admin() {
     setSelectedDescription("");
   };
 
+  // ✅ Handle Go button click to generate AI description
+  const handleGenerate = async (user) => {
+    try {
+      // Mark this row as loading
+      setGeneratingIds((prev) => [...prev, user._id]);
+
+      const response = await adminService.generateDescription(user);
+
+      if (response.success) {
+        // Update the user's status in the table
+        setKycData((prevData) =>
+          prevData.map((u) =>
+            u._id === user._id ? { ...u, status: response.description } : u
+          )
+        );
+
+        // Show the modal automatically
+        setSelectedDescription(response.description);
+        setShowModal(true);
+      } else {
+        alert(response.message || "Failed to generate AI description.");
+      }
+    } catch (err) {
+      console.error("❌ Error generating AI description:", err);
+      alert(err.message || "Something went wrong!");
+    } finally {
+      // Remove loading state
+      setGeneratingIds((prev) => prev.filter((id) => id !== user._id));
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -83,6 +118,7 @@ export default function Admin() {
                 <th>Gender</th>
                 <th>Description</th>
                 <th>Type</th>
+                <th>Generate</th>
               </tr>
             </thead>
             <tbody>
@@ -104,6 +140,15 @@ export default function Admin() {
                     </button>
                   </td>
                   <td>{user.type}</td>
+                  <td>
+                    <button
+                      className="generate-btn"
+                      onClick={() => handleGenerate(user)}
+                      disabled={generatingIds.includes(user._id)}
+                    >
+                      {generatingIds.includes(user._id) ? "Generating..." : "Go"}
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -113,7 +158,6 @@ export default function Admin() {
         <p className="no-data-msg">No KYC data found.</p>
       )}
 
-      {/* ✅ Modal Popup */}
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
@@ -127,4 +171,5 @@ export default function Admin() {
       )}
     </div>
   );
+
 }

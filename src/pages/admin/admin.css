@@ -1,159 +1,169 @@
-/* ====== General Layout ====== */
+/* =======================
+   Admin Container
+======================= */
 .admin-container {
-  min-height: 100vh;
-  padding: 40px;
-  background: linear-gradient(135deg, #f4f7fb, #e8eef9);
-  font-family: "Inter", sans-serif;
-  color: #2c3e50;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9fc;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .admin-title {
   text-align: center;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #1a2b49;
+  font-size: 2rem;
+  color: #4b2b7f;
   margin-bottom: 30px;
 }
 
-/* ====== Table Section ====== */
+/* =======================
+   Error / No Data
+======================= */
+.admin-error {
+  color: #d32f2f;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.no-data-msg {
+  color: #555;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* =======================
+   Table Styling
+======================= */
 .table-wrapper {
   overflow-x: auto;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  padding: 20px;
 }
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .admin-table th,
 .admin-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 15px;
+  text-align: left;
 }
 
-.admin-table th {
-  background-color: #f1f5fb;
+.admin-table thead {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: #fff;
   font-weight: 600;
-  color: #34495e;
 }
 
-.admin-table tr:hover {
-  background-color: #f9fbff;
-  transition: background 0.3s ease;
+.admin-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s;
 }
 
-/* ====== Buttons ====== */
-.view-btn {
-  background-color: #4a90e2;
-  color: #ffffff;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 0.9rem;
+.admin-table tbody tr:hover {
+  background-color: #f1f1ff;
   cursor: pointer;
-  transition: background 0.3s ease;
+}
+
+.admin-table td button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* =======================
+   Buttons
+======================= */
+.view-btn {
+  background-color: #6a11cb;
+  color: #fff;
 }
 
 .view-btn:hover {
-  background-color: #357abd;
+  background-color: #2575fc;
+}
+
+.generate-btn {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.generate-btn:hover {
+  background-color: #ff3b3b;
 }
 
 .close-btn {
-  background-color: #ff5a5f;
+  background-color: #555;
   color: #fff;
-  border: none;
   padding: 8px 16px;
   border-radius: 6px;
+  margin-top: 20px;
   font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .close-btn:hover {
-  background-color: #e04848;
+  background-color: #333;
 }
 
-/* ====== Error and Empty State ====== */
-.admin-error {
-  text-align: center;
-  color: #d9534f;
-  background: #fdeaea;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
-
-.no-data-msg {
-  text-align: center;
-  color: #6c757d;
-  font-size: 1rem;
-  margin-top: 40px;
-}
-
-/* ====== Modal Popup ====== */
+/* =======================
+   Modal Styling
+======================= */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(28, 41, 61, 0.5);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
+  justify-content: center;
+  z-index: 1000;
 }
 
 .modal-box {
-  background: #fff;
-  padding: 30px;
-  width: 420px;
+  background-color: #fff;
+  padding: 25px 30px;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  animation: scaleUp 0.3s ease;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.3s ease-out;
 }
 
 .modal-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #1a2b49;
+  font-size: 1.5rem;
+  color: #4b2b7f;
   margin-bottom: 15px;
-  text-align: center;
 }
 
 .modal-content {
+  font-size: 1rem;
   color: #333;
   line-height: 1.5;
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 12px;
-  max-height: 250px;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  margin-bottom: 20px;
 }
 
-/* ====== Animations ====== */
-@keyframes fadeIn {
-  from {
+/* =======================
+   Animations
+======================= */
+@keyframes slideDown {
+  0% {
+    transform: translateY(-30px);
     opacity: 0;
   }
-  to {
+  100% {
+    transform: translateY(0);
     opacity: 1;
-  }
-}
-
-@keyframes scaleUp {
-  from {
-    transform: scale(0.9);
-  }
-  to {
-    transform: scale(1);
   }
 }
